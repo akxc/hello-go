@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"hello-go/monitor"
+	"plugin"
 	"time"
 )
 
@@ -116,14 +117,30 @@ func one_direction_channel() {
 	//readCh2 <- "try to write "
 
 }
+
+func load_plugin() {
+	pdll, err := plugin.Open("print.so")
+	if err != nil {
+		fmt.Println("err happened at Open plugin: ", err)
+		return
+	}
+	funcPrint, err := pdll.Lookup("PrintByPlugin")
+	if err != nil {
+		fmt.Println("err happened at Lookup plugin: ", err)
+		return
+	}
+	funcPrint.(func(string))("hello go plugin")
+	return
+}
 func main() {
 	//defer_test()
 	//package_test()
 	//variable_visibility()
 	//channel_test()
-	timeout_by_slelect()
-	check_chan_full_by_select()
-	one_direction_channel()
+	//timeout_by_slelect()
+	//check_chan_full_by_select()
+	//one_direction_channel()
+	load_plugin()
 
 }
 
