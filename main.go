@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"hello-go/monitor"
+	"hello-go/pkg/monitor"
+	"hello-go/pkg/slices"
 	"plugin"
 	"time"
 )
@@ -141,6 +142,7 @@ func main() {
 	//check_chan_full_by_select()
 	//one_direction_channel()
 	load_plugin()
+	slices.Sort()
 
 }
 
